@@ -6,21 +6,24 @@
 #    By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/02 11:08:47 by tssaito           #+#    #+#              #
-#    Updated: 2025/04/02 18:27:26 by tssaito          ###   ########.fr        #
+#    Updated: 2025/04/02 21:03:21 by tssaito          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
 # directories
-SRCDIR = srcs
 INCDIR = incs
+SRCDIR = srcs
+UTILSDIR = ft_utils
 OBJDIR = objs
 
 # sources
 SRCS = main.c \
 	   isvalid_args.c init_data.c \
-	   ft_utils.c ft_utils2.c
+	   $(addprefix $(UTILSDIR)/, ft_atoi.c ft_isdigit.c ft_isspace.c \
+	   ft_putstr_fd.c ft_putendl_fd.c ft_strlen.c \
+	   ft_strjoin.c ft_strlcat.c ft_strlcpy.c)
 
 # objects
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
@@ -54,6 +57,10 @@ test: $(OBJS)
 	valgrind $(VALGRIND_FLAGS) ./$(NAME) $(ARGS)
 
 $(OBJDIR)/%.o:$(SRCDIR)/%.c
+	@mkdir -p $(@D)
+	$(CC) $(WFLAG) $(IFLAG) -c $< -o $@
+
+$(OBJDIR)/%.o:$(UTILSDIR)/%.c
 	@mkdir -p $(@D)
 	$(CC) $(WFLAG) $(IFLAG) -c $< -o $@
 

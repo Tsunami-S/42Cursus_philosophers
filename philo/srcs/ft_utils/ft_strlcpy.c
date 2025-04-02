@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 11:13:57 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/02 19:33:20 by tssaito          ###   ########.fr       */
+/*   Created: 2025/04/02 21:00:40 by tssaito           #+#    #+#             */
+/*   Updated: 2025/04/02 21:01:37 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#include "philo.h"
 
-typedef struct s_data
+size_t	ft_strlcpy(char *dst, const char *src, size_t dsize)
 {
-	int	num_of_philo;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	num_of_must_eat;
-}		t_data;
+	size_t	i;
+	size_t	len;
 
-#endif
+	len = ft_strlen(src);
+	if (!dsize)
+		return (len);
+	i = 0;
+	while (src[i] && i < dsize - 1)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (len);
+}

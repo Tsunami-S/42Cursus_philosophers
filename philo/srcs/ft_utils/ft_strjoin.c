@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 11:13:57 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/02 19:33:20 by tssaito          ###   ########.fr       */
+/*   Created: 2025/04/02 21:00:34 by tssaito           #+#    #+#             */
+/*   Updated: 2025/04/02 21:01:52 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#include "philo.h"
 
-typedef struct s_data
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int	num_of_philo;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	num_of_must_eat;
-}		t_data;
+	int		s1_len;
+	int		s2_len;
+	char	*ans;
 
-#endif
+	if (!s1 || !s2)
+		return (NULL);
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	ans = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
+	if (!ans)
+		return (NULL);
+	ft_strlcpy(ans, s1, s1_len + 1);
+	ft_strlcat(ans, s2, s1_len + s2_len + 1);
+	return (ans);
+}

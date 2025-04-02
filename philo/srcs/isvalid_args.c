@@ -6,7 +6,7 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 16:32:33 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/02 18:49:59 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/02 19:37:27 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ static void	in_short_of_args(void)
 	ft_putendl_fd("time_to_eat: 1 ~ 2147483647", STDERR_FILENO);
 	ft_putendl_fd("time_to_sleep: 1 ~ 2147483647", STDERR_FILENO);
 	ft_putendl_fd("num_of_times_must_eat: 0 ~ 2147483647", STDERR_FILENO);
+	exit(EXIT_FAILURE);
 }
 
-static void	print_argv_error(int index, int flag)
+static int	print_argv_error(int index, int err_num)
 {
-	if (!flag)
+	if (!err_num)
 	{
 		ft_putendl_fd("Error: Invalid arguments", STDERR_FILENO);
 		ft_putstr_fd("Example: ./philo ", STDERR_FILENO);
@@ -50,21 +51,19 @@ static void	print_argv_error(int index, int flag)
 		ft_putendl_fd("time_to_sleep: 1 ~ 2147483647", STDERR_FILENO);
 	else if (index == 5)
 		ft_putendl_fd("num_of_times_must_eat: 0 ~ 2147483647", STDERR_FILENO);
+	return (index);
 }
 
 void	validate(int argc, char **argv)
 {
 	int	i;
 	int	j;
-	int	flag;
+	int	err_num;
 	int	num;
 
 	if (argc != 5 && argc != 6)
-	{
 		in_short_of_args();
-		exit(EXIT_FAILURE);
-	}
-	flag = 0;
+	err_num = 0;
 	i = 1;
 	while (i < argc)
 	{
@@ -75,12 +74,9 @@ void	validate(int argc, char **argv)
 		while (ft_isdigit(argv[i][j]))
 			j++;
 		if (argv[i][j] || (i < 5 && num <= 0) || (i == 5 && num < 0))
-		{
-			print_argv_error(i, flag);
-			flag = 1;
-		}
+			err_num = print_argv_error(i, err_num);
 		i++;
 	}
-	if (flag)
+	if (err_num)
 		exit(EXIT_FAILURE);
 }

@@ -6,26 +6,26 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:13:57 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/02 18:27:12 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/02 19:33:17 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
+# include "struct.h"
+# include <limits.h>
 # include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
-# include <limits.h>
-# include "struct.h"
 
 /* philo */
 
 /* init utils */
-void validate(int argc, char **argv);
+void	validate(int argc, char **argv);
 t_data	init_data(int argc, char **argv);
 
 /* ft_utils */

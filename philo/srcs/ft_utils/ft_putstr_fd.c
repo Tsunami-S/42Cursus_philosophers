@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 11:13:57 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/02 19:33:20 by tssaito          ###   ########.fr       */
+/*   Created: 2025/04/02 21:00:30 by tssaito           #+#    #+#             */
+/*   Updated: 2025/04/02 21:01:22 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#include "philo.h"
 
-typedef struct s_data
+void	ft_putstr_fd(char *s, int fd)
 {
-	int	num_of_philo;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	num_of_must_eat;
-}		t_data;
-
-#endif
+	if (!s)
+		return ;
+	write(fd, s, ft_strlen(s));
+}

@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 11:13:57 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/02 19:33:20 by tssaito          ###   ########.fr       */
+/*   Created: 2025/04/02 21:00:43 by tssaito           #+#    #+#             */
+/*   Updated: 2025/04/02 21:01:30 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#include "philo.h"
 
-typedef struct s_data
+size_t	ft_strlen(const char *s)
 {
-	int	num_of_philo;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	num_of_must_eat;
-}		t_data;
+	size_t	count;
 
-#endif
+	count = 0;
+	while (s[count])
+		count++;
+	return (count);
+}

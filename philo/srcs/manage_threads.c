@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   manage_threads.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 11:13:57 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/02 19:33:20 by tssaito          ###   ########.fr       */
+/*   Created: 2025/04/02 21:44:46 by tssaito           #+#    #+#             */
+/*   Updated: 2025/04/02 21:56:08 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#include "philo.h"
 
-typedef struct s_data
-{
-	int	num_of_philo;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	num_of_must_eat;
-}		t_data;
-
-#endif
+// monitor all threads to check dead or alive or reached to must eat
+// while(check_all_threads == all alive)
+// usleep() ... how many secconds is optimal..?
+// if one of threads has finished, break
+// finish all threads (join)
