@@ -6,7 +6,7 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:13:57 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/03 23:09:40 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/03 23:31:28 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,16 @@
 # include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
-
 # include "struct.h"
 
 /* philo */
 pthread_t	*create_threads(t_philo *philo, t_data *data);
-void		*routine(void *arg);
 bool		check_status(t_philo *philo);
 void		manage_threads(t_philo *philo, t_data *data, pthread_t *thread);
+void		waiting(t_philo *philo);
+void		eating(t_philo *philo);
+void		sleeping(t_philo *philo);
+void		thinking(t_philo *philo);
 
 /* init utils */
 void		validate(int argc, char **argv);
