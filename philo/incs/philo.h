@@ -6,14 +6,13 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:13:57 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/02 19:33:17 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/03 11:40:10 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include "struct.h"
 # include <limits.h>
 # include <pthread.h>
 # include <stdio.h>
@@ -21,12 +20,16 @@
 # include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
+# include "struct.h"
 
 /* philo */
 
 /* init utils */
 void	validate(int argc, char **argv);
 t_data	init_data(int argc, char **argv);
+
+/* exit utils */
+void	destroy_data(t_data *data);
 
 /* ft_utils */
 int		ft_atoi(const char *nptr);
