@@ -6,7 +6,7 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 16:32:02 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/03 11:41:00 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/03 23:14:50 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,15 @@
 
 int	main(int argc, char **argv)
 {
-	t_data	data;
+	t_data		data;
+	t_philo		*philo;
+	pthread_t	*thread;
 
 	validate(argc, argv);
 	data = init_data(argc, argv);
-	
-	// create pthread
-	// manage threads
-
-	(void)data.check_time;
-	(void)data.folk;
-	printf("data[%d]\n", data.time_to_eat);
-	destroy_data(&data);
+	philo = init_philo(&data);
+	thread = create_threads(philo, &data);
+	manage_threads(philo, &data, thread);
+	destroy_data(&data, philo, thread, data.num_of_philo);
 	return (EXIT_SUCCESS);
 }

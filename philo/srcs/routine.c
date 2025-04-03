@@ -6,31 +6,62 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 20:54:47 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/03 10:07:56 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/03 23:15:15 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// start_routine is handed to pthread_create
-// routine get one param(void *)
-// each philosopher use this func at each thread
-
-// required informations(t_philo?)
-// philo's number
-// mutex
-// current status(eating, sleeping, thinking)
-// count of eating(if argv[5] is existing)
-
-// philosophers sitting side by side are not able to eating at the same time
-// so, how can I adjust their eating timing?
-
-void *routine(void *arg)
+static void	waiting(t_philo *philo)
 {
-	//philo = (t_philo)arg;
-	//
-	// while(alive)
-	// 	eat -> sleep -> think (usleep)
-	// check dead or alive (or reached to num_must_eat)
-	// dead or finished -> return(return value is used as exit status)
+	while (!philo->data->set_all_dinners)
+		usleep(500);
+}
+
+static void	eating(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data->check_time);
+	printf("time eating[%d]\n", philo->number);
+	pthread_mutex_unlock(&philo->data->check_time);
+	philo->status = EATING;
+	usleep(philo->data->time_to_eat * 1000);
+	philo->num_of_eating += 1;
+	pthread_mutex_unlock(philo->left);
+	pthread_mutex_unlock(philo->right);
+	//	philo->last_eat_time = get_current_time();
+}
+
+static void	sleeping(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data->check_time);
+	printf("time sleeping\n");
+	pthread_mutex_unlock(&philo->data->check_time);
+	philo->status = SLEEPING;
+	usleep(philo->data->time_to_sleep * 1000);
+}
+
+static void	thinking(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data->check_time);
+	printf("time thinking\n");
+	pthread_mutex_unlock(&philo->data->check_time);
+	philo->status = THINKING;
+}
+
+void	*routine(void *arg)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)arg;
+	//	if(philo->data->num_of_philo == 1)
+	//		return (one_philo(philo));
+	if (philo->number % 2)
+		waiting(philo);
+	while (check_status(philo))
+	{
+		eating(philo);
+		sleeping(philo);
+		thinking(philo);
+	}
+	return (NULL);
 }
