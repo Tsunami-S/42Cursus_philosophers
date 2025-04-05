@@ -6,7 +6,7 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:13:57 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/03 23:31:28 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/06 00:26:11 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,28 @@
 # include "struct.h"
 
 /* philo */
-pthread_t	*create_threads(t_philo *philo, t_data *data);
+pthread_t	*create_threads(t_philo *philo, t_data *data, t_mutex *mutex, int count);
 bool		check_status(t_philo *philo);
-void		manage_threads(t_philo *philo, t_data *data, pthread_t *thread);
+void		manage_threads(t_philo *philo, t_data *data, pthread_t *thread, t_mutex *mutex);
 void		waiting(t_philo *philo);
 void		eating(t_philo *philo);
 void		sleeping(t_philo *philo);
 void		thinking(t_philo *philo);
+bool	are_forks_placed(t_philo *philo, int number, t_data *data);
+
+/* time utils */
+int init_start_time(t_philo *philo);
+long long	get_current_time(t_data *data);
 
 /* init utils */
 void		validate(int argc, char **argv);
 t_data		init_data(int argc, char **argv);
-t_philo		*init_philo(t_data *data);
+t_mutex	init_mutex(t_data *data);
+t_philo		*init_philo(t_data *data, t_mutex *mutex);
 
 /* exit utils */
 void		destroy_data(t_data *data, t_philo *philo, pthread_t *thread,
-				int count);
+				int count, t_mutex *mutex);
 
 /* ft_utils */
 int			ft_atoi(const char *nptr);

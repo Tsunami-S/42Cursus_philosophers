@@ -6,39 +6,15 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 17:26:06 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/03 21:27:53 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/06 00:39:52 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	exit_with_error(char *msg)
-{
-	ft_putendl_fd(msg, STDERR_FILENO);
-	exit(EXIT_FAILURE);
-}
-
-static void	init_mutex(t_data *data)
-{
-	int	i;
-
-	if (pthread_mutex_init(&(data->check_time), NULL) != 0)
-		exit_with_error("mutex init error");
-	data->fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
-			* data->num_of_philo);
-	if (!data->fork)
-		exit_with_error("malloc error");
-	i = 0;
-	while (i < data->num_of_philo)
-	{
-		if (pthread_mutex_init(&(data->fork[i]), NULL) != 0)
-			exit_with_error("mutex init error");
-		i++;
-	}
-}
-
 t_data	init_data(int argc, char **argv)
 {
+	int i;
 	t_data	data;
 
 	data.num_of_philo = ft_atoi(argv[1]);
@@ -46,8 +22,20 @@ t_data	init_data(int argc, char **argv)
 	data.time_to_eat = ft_atoi(argv[3]);
 	data.time_to_sleep = ft_atoi(argv[4]);
 	data.num_of_must_eat = -1;
+	data.set_all_dinners = 0;
+	data.fin = 0;
 	if (argc == 6)
 		data.num_of_must_eat = ft_atoi(argv[5]);
-	init_mutex(&data);
+	data.status = (t_status *)malloc(sizeof(t_status) * data.num_of_philo);
+	if(!data.status)
+	{
+		exit(1);
+	}
+	i = 0;
+	while(i < data.num_of_philo)
+	{
+		data.status[i] = THINKING;
+		i++;
+	}
 	return (data);
 }

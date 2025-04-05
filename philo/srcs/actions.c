@@ -1,49 +1,69 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 20:54:47 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/03 23:31:45 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/06 00:30:35 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	waiting(t_philo *philo)
+void print_time(t_philo *philo, char *msg)
 {
-	while (!philo->data->set_all_dinners)
-		usleep(500);
+	long long timestamp;
+
+	timestamp = get_current_time(philo->data) - philo->start_time;
+	printf("%lld %d %s\n", timestamp / 1000, philo->number, msg);
 }
 
 void	eating(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->data->check_time);
-	printf("time eating[%d]\n", philo->number);
-	pthread_mutex_unlock(&philo->data->check_time);
-	philo->status = EATING;
-	usleep(philo->data->time_to_eat * 1000);
-	philo->num_of_eating += 1;
-	pthread_mutex_unlock(philo->left);
+	int	eating;
+
+	pthread_mutex_lock(&philo->mutex->check_time);
+	philo->data->status[philo->number - 1] = EATING;
+	if (!philo->data->fin)
+	{
+		print_time(philo, "has taken a fork");
+		print_time(philo, "has taken a fork");
+		print_time(philo, "is eating");
+		philo->num_of_eating += 1;
+	}
+	pthread_mutex_unlock(&philo->mutex->check_time);
+	eating = 0;
+	pthread_mutex_lock(philo->left);
+	pthread_mutex_lock(philo->right);
+	while (!philo->data->fin && eating < philo->data->time_to_eat)
+	{
+		usleep(1000);
+		eating++;
+	}
 	pthread_mutex_unlock(philo->right);
-	//	philo->last_eat_time = get_current_time();
+	pthread_mutex_unlock(philo->left);
+	philo->last_eat_time = get_current_time(philo->data);
 }
 
 void	sleeping(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->data->check_time);
-	printf("time sleeping\n");
-	pthread_mutex_unlock(&philo->data->check_time);
-	philo->status = SLEEPING;
-	usleep(philo->data->time_to_sleep * 1000);
+	pthread_mutex_lock(&philo->mutex->check_time);
+	if (!philo->data->fin)
+		print_time(philo, "is sleeping");
+	philo->data->status[philo->number - 1] = SLEEPING;
+	pthread_mutex_unlock(&philo->mutex->check_time);
+	while (!philo->data->fin &&  get_current_time(philo->data)
+			- philo->last_eat_time < (long long) philo->data->time_to_sleep * 1000)
+		usleep(1000);
 }
 
 void	thinking(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->data->check_time);
-	printf("time thinking\n");
-	pthread_mutex_unlock(&philo->data->check_time);
-	philo->status = THINKING;
+	pthread_mutex_lock(&philo->mutex->check_time);
+	if (!philo->data->fin)
+		print_time(philo, "is thinking");
+	philo->data->status[philo->number - 1] = THINKING;
+	pthread_mutex_unlock(&philo->mutex->check_time);
 }
