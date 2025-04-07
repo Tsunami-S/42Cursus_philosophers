@@ -6,7 +6,7 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 21:44:46 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/06 00:57:35 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/06 15:32:22 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ bool is_full_of_eating(t_philo *philo, t_data *data, t_mutex *mutex)
 	return true;
 }
 
-bool is_left(t_philo *philo, t_mutex *mutex, int index)
+bool is_left(t_data *data, t_mutex *mutex, int index)
 {
 	pthread_mutex_lock(&mutex->check_time);
-	if(!philo[index].leave)
+	if(!data->leave[index])
 	{
 		pthread_mutex_unlock(&mutex->check_time);
 		return false;
@@ -87,7 +87,7 @@ void	manage_threads(t_philo *philo, t_data *data, pthread_t *thread, t_mutex *mu
 			i = 0;
 			while(i < count)
 			{
-				while(!is_left(philo, mutex, i))
+				while(!is_left(data, mutex, i))
 					usleep(300);
 				i++;
 			}

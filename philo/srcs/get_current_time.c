@@ -6,7 +6,7 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 13:55:28 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/05 22:14:39 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/06 15:24:01 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ int init_start_time(t_philo *philo)
 
 	if(gettimeofday(&tv, NULL))
 		return (1);
-	philo->start_time = (long long)tv.tv_sec * 1000 * 1000 + tv.tv_usec;
+	philo->data->start_time[philo->number - 1] = (long long)tv.tv_sec * 1000 * 1000 + tv.tv_usec;
 	return (0);
 }

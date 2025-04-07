@@ -6,7 +6,7 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 17:26:06 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/06 00:39:45 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/06 19:05:57 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,7 @@ t_philo	*init_philo(t_data *data, t_mutex *mutex)
 	{
 		philo[i].number = i + 1;
 		philo[i].num_of_eating = 0;
-		philo[i].last_eat_time = 0;
 		philo[i].data = data;
-		philo[i].leave = 0;
 		philo[i].mutex = mutex;
 		philo[i].left = &(mutex->fork[i]);
 		if (i == 0)

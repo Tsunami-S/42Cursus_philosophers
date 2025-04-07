@@ -6,7 +6,7 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:13:57 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/06 00:37:23 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/06 19:05:41 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ typedef struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				num_of_must_eat;
+	long long		*last_eat_time;
+	long long		*start_time;
 	t_status		*status;
+	bool			*leave;
 	bool			fin;
 	bool			set_all_dinners;
 }					t_data;
@@ -43,9 +46,6 @@ typedef struct s_philo
 {
 	int				number;
 	int				num_of_eating;
-	int				last_eat_time;
-	bool			leave;
-	long long		start_time;
 	pthread_mutex_t	*left;
 	pthread_mutex_t	*right;
 	t_data			*data;

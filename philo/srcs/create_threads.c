@@ -6,7 +6,7 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 20:54:17 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/06 00:59:09 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/06 19:04:38 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,26 @@
 static void	*routine(void *arg)
 {
 	t_philo	*philo;
+	int number;
 
 	philo = (t_philo *)arg;
 //	if (philo->data->num_of_philo == 1)
 //		return (routine_for_one(philo));
-	pthread_mutex_lock(&philo->mutex->check_time);
-	if (philo->number % 2 == 1)
-			usleep(500);
-	pthread_mutex_unlock(&philo->mutex->check_time);
+	number = philo->number;
+	if (number % 2 == 1)
+		usleep(500);
 	pthread_mutex_lock(&philo->mutex->check_time);
 	init_start_time(philo);
 	pthread_mutex_unlock(&philo->mutex->check_time);
-	while (check_status(philo))
+	while (check_status(philo, number))
 	{
-		eating(philo);
-		sleeping(philo);
-		thinking(philo);
+		eating(philo, number);
+		sleeping(philo, number);
+		thinking(philo, number);
 	}
-	philo->leave = 1;
+	pthread_mutex_lock(&philo->mutex->check_time);
+	philo->data->leave[philo->number - 1] = 1;
+	pthread_mutex_unlock(&philo->mutex->check_time);
 	return (NULL);
 }
 

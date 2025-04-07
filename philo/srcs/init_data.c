@@ -6,7 +6,7 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 17:26:06 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/06 00:39:52 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/06 15:24:47 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,13 @@ t_data	init_data(int argc, char **argv)
 		exit(1);
 	}
 	i = 0;
+	data.leave = (bool *)malloc(sizeof(bool) * data.num_of_philo);
+	data.start_time = (long long *)malloc(sizeof(long long) * data.num_of_philo);
+	data.last_eat_time = (long long *)malloc(sizeof(long long) * data.num_of_philo);
 	while(i < data.num_of_philo)
 	{
 		data.status[i] = THINKING;
+		data.leave[i] = 0;
 		i++;
 	}
 	return (data);
