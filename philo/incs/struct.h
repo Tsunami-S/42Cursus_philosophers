@@ -6,7 +6,7 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:13:57 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/09 10:50:08 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/09 19:13:59 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,22 @@ typedef struct s_data
 	int					num_of_must_eat;
 	int					num_of_fin;
 	int					num_of_left;
+	int					*num_of_eating;
 	long long			start_time;
 	bool				fin;
 	t_mutex				mutex_status;
 	t_mutex				mutex_time;
+	t_mutex				mutex_write;
+	t_mutex				mutex_permission;
 	t_mutex				*mutex_fork;
 }						t_data;
 
 typedef struct s_philo
 {
 	int					number;
-	int					num_of_eating;
+	int					left_index;
+	int					right_index;
+	bool				permission;
 	long long			last_eat_time;
 	t_data				*data;
 	pthread_t			thread;

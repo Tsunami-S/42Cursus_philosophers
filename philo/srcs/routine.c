@@ -6,7 +6,7 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 20:54:17 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/09 00:09:04 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/09 20:09:56 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,20 @@ bool	is_over(t_philo *philo)
 	return (bool_value);
 }
 
-static void	*routine_for_one(t_philo *philo)
+void	*routine_for_one(void *arg)
 {
-	int	number;
+	int		number;
+	t_philo	*philo;
 
+	philo = (t_philo *)arg;
 	number = 1;
-	while (!is_over(philo))
+	while (1)
 	{
 		eating(philo, number, ALONE);
 		sleeping(philo);
 		thinking(philo);
+		if (is_over(philo))
+			break ;
 	}
 	pthread_mutex_lock(&philo->data->mutex_status);
 	philo->data->num_of_left += 1;
@@ -47,16 +51,16 @@ void	*routine(void *arg)
 	int		number;
 
 	philo = (t_philo *)arg;
-	if (philo->data->num_of_philo == 1)
-		return (routine_for_one(philo));
 	number = philo->number;
-	if (number % 2)
-		usleep(200);
-	while (!is_over(philo))
+	if (number % 2 == 0)
+		usleep(300);
+	while (1)
 	{
 		eating(philo, number, NOT_ALONE);
 		sleeping(philo);
 		thinking(philo);
+		if (is_over(philo))
+			break ;
 	}
 	pthread_mutex_lock(&philo->data->mutex_status);
 	philo->data->num_of_left += 1;

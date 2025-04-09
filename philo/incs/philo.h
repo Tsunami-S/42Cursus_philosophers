@@ -6,7 +6,7 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:13:57 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/09 00:49:07 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/09 19:39:58 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@
 
 /* philo */
 void		manage_threads(t_philo **philo, t_data *data);
-bool		is_over(t_philo *philo);
-bool		is_died(t_philo *philo);
-bool		check_status(t_philo *philo);
 void		*routine(void *arg);
+void		*routine_for_one(void *arg);
+bool		get_forks(t_philo *philo, int number, int num_of_philo);
 void		eating(t_philo *philo, int number, int num_of_philo);
 void		sleeping(t_philo *philo);
 void		thinking(t_philo *philo);
+bool		is_over(t_philo *philo);
 bool		update_status(t_philo *philo, t_type type);
 
 /* init utils */
@@ -40,9 +40,9 @@ void		init_philosopher(int argc, char **argv, t_data *data,
 				t_philo **philo);
 
 /* time utils */
+long long	init_start_time(t_data *data, t_philo **philo);
 long long	get_current_time(void);
 long long	get_time_data(t_philo *philo, t_data_type type);
-long long	get_timestamp(t_philo *philo);
 
 /* exit utils */
 void		exit_philosopher(t_data *data, t_philo **philos, int status);

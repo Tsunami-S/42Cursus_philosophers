@@ -1,16 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_current_time.c                                 :+:      :+:    :+:   */
+/*   time_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 13:55:28 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/09 00:10:21 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/09 19:39:34 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+long long	init_start_time(t_data *data, t_philo **philo)
+{
+	struct timeval	tv;
+
+	if (gettimeofday(&tv, NULL))
+		exit_philosopher(data, philo, EXIT_FAILURE);
+	return ((long long)tv.tv_sec * 1000 * 1000 + tv.tv_usec);
+}
 
 long long	get_current_time(void)
 {
