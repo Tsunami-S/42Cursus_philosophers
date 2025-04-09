@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isvalid_args.c                                     :+:      :+:    :+:   */
+/*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 16:32:33 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/02 19:37:27 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/09 00:09:07 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ static int	print_argv_error(int index, int err_num)
 	}
 	if (index == 1)
 		ft_putendl_fd("num_of_philosophers: 1 ~ 2147483647", STDERR_FILENO);
-	else if (index == 2)
+	if (index == 2)
 		ft_putendl_fd("time_to_die: 1 ~ 2147483647", STDERR_FILENO);
-	else if (index == 3)
+	if (index == 3)
 		ft_putendl_fd("time_to_eat: 1 ~ 2147483647", STDERR_FILENO);
-	else if (index == 4)
+	if (index == 4)
 		ft_putendl_fd("time_to_sleep: 1 ~ 2147483647", STDERR_FILENO);
-	else if (index == 5)
+	if (index == 5)
 		ft_putendl_fd("num_of_times_must_eat: 0 ~ 2147483647", STDERR_FILENO);
 	return (index);
 }

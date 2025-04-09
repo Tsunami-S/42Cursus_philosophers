@@ -6,7 +6,7 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:13:57 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/06 16:28:57 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/09 00:49:07 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,28 @@
 # include "struct.h"
 
 /* philo */
-pthread_t	*create_threads(t_philo *philo, t_data *data, t_mutex *mutex, int count);
-bool		check_status(t_philo *philo, int number);
-void		manage_threads(t_philo *philo, t_data *data, pthread_t *thread, t_mutex *mutex);
-void		eating(t_philo *philo, int number);
-void		sleeping(t_philo *philo, int number);
-void		thinking(t_philo *philo, int number);
-bool	are_forks_placed(t_philo *philo, int number, t_data *data);
-
-/* time utils */
-int init_start_time(t_philo *philo);
-long long	get_current_time(t_data *data);
+void		manage_threads(t_philo **philo, t_data *data);
+bool		is_over(t_philo *philo);
+bool		is_died(t_philo *philo);
+bool		check_status(t_philo *philo);
+void		*routine(void *arg);
+void		eating(t_philo *philo, int number, int num_of_philo);
+void		sleeping(t_philo *philo);
+void		thinking(t_philo *philo);
+bool		update_status(t_philo *philo, t_type type);
 
 /* init utils */
 void		validate(int argc, char **argv);
-t_data		init_data(int argc, char **argv);
-t_mutex	init_mutex(t_data *data);
-t_philo		*init_philo(t_data *data, t_mutex *mutex);
+void		init_philosopher(int argc, char **argv, t_data *data,
+				t_philo **philo);
+
+/* time utils */
+long long	get_current_time(void);
+long long	get_time_data(t_philo *philo, t_data_type type);
+long long	get_timestamp(t_philo *philo);
 
 /* exit utils */
-void		destroy_data(t_data *data, t_philo *philo, pthread_t *thread,
-				int count, t_mutex *mutex);
+void		exit_philosopher(t_data *data, t_philo **philos, int status);
 
 /* ft_utils */
 int			ft_atoi(const char *nptr);

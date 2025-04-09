@@ -6,93 +6,76 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 21:44:46 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/06 15:32:22 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/09 10:49:56 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// monitor all threads to check dead or alive or reached to must eat
-// while(check_all_threads == all alive)
-// usleep() ... how many secconds is optimal..?
-// if one of threads has finished, break
-// finish all threads (join)
-
-bool is_alive_all_philo(t_philo *philo, t_mutex *mutex)
+static long long	init_start_time(t_data *data, t_philo **philo)
 {
-	int i;
+	struct timeval	tv;
+
+	if (gettimeofday(&tv, NULL))
+		exit_philosopher(data, philo, EXIT_FAILURE);
+	return ((long long)tv.tv_sec * 1000 * 1000 + tv.tv_usec);
+}
+
+static void	create_threads(t_philo **philos, t_data *data, int num_of_philo)
+{
+	int			i;
+	long long	start_time;
+	t_philo		*philo;
 
 	i = 0;
-	pthread_mutex_lock(&mutex->check_time);
-	while(i < philo[0].data->num_of_philo)
+	philo = *philos;
+	start_time = init_start_time(data, philos);
+	data->start_time = start_time;
+	while (i < num_of_philo)
 	{
-		if(philo[0].data->status[i] == DEAD)
-		{
-			pthread_mutex_unlock(&mutex->check_time);
-			return false;
-		}
+		philo[i].last_eat_time = data->start_time;
+		if (pthread_create(&(philo[i].thread), NULL, &routine, &philo[i]))
+			exit_philosopher(data, philos, EXIT_FAILURE);
 		i++;
 	}
-	pthread_mutex_unlock(&mutex->check_time);
-	return true;
 }
 
-bool is_full_of_eating(t_philo *philo, t_data *data, t_mutex *mutex)
+static bool	is_all_over(t_philo *philo, int num_of_philo)
 {
-	int i;
+	bool	bool_value;
 
-	i = 0;
-	pthread_mutex_lock(&mutex->check_time);
-	while(i < data->num_of_philo)
-	{
-		if(philo[i].num_of_eating != data->num_of_must_eat)
-		{
-			pthread_mutex_unlock(&mutex->check_time);
-			return false;
-		}
-		i++;
-	}
-	pthread_mutex_unlock(&mutex->check_time);
-	return true;
+	bool_value = false;
+	pthread_mutex_lock(&philo->data->mutex_status);
+	if (philo->data->num_of_fin == num_of_philo)
+		philo->data->fin = 1;
+	if (philo->data->fin)
+		bool_value = true;
+	pthread_mutex_unlock(&philo->data->mutex_status);
+	return (bool_value);
 }
 
-bool is_left(t_data *data, t_mutex *mutex, int index)
+static void	wait_all_exit(t_data *data, int num_of_philo)
 {
-	pthread_mutex_lock(&mutex->check_time);
-	if(!data->leave[index])
-	{
-		pthread_mutex_unlock(&mutex->check_time);
-		return false;
-	}
-	pthread_mutex_unlock(&mutex->check_time);
-	return true;
-}
+	int	num_of_left;
 
-void	manage_threads(t_philo *philo, t_data *data, pthread_t *thread, t_mutex *mutex)
-{
-	int i;
-	int count;
-
-	(void)thread;
-	pthread_mutex_lock(&mutex->check_time);
-	count = data->num_of_philo;
-	pthread_mutex_unlock(&mutex->check_time);
 	while (1)
 	{
-		if(!is_alive_all_philo(philo, mutex) || is_full_of_eating(philo, data, mutex))
-		{
-			pthread_mutex_lock(&mutex->check_time);
-			data->fin = 1;
-			pthread_mutex_unlock(&mutex->check_time);
-			i = 0;
-			while(i < count)
-			{
-				while(!is_left(data, mutex, i))
-					usleep(300);
-				i++;
-			}
-			return;
-		}
+		pthread_mutex_lock(&data->mutex_status);
+		num_of_left = data->num_of_left;
+		pthread_mutex_unlock(&data->mutex_status);
+		if (num_of_left == num_of_philo)
+			break ;
 		usleep(300);
 	}
+}
+
+void	manage_threads(t_philo **philo, t_data *data)
+{
+	int	num_of_philo;
+
+	num_of_philo = data->num_of_philo;
+	create_threads(philo, data, num_of_philo);
+	while (!is_all_over(*philo, num_of_philo))
+		usleep(100);
+	wait_all_exit(data, num_of_philo);
 }

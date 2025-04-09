@@ -6,7 +6,7 @@
 #    By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/02 11:08:47 by tssaito           #+#    #+#              #
-#    Updated: 2025/04/05 18:54:23 by tssaito          ###   ########.fr        #
+#    Updated: 2025/04/09 00:48:50 by tssaito          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,10 +20,9 @@ OBJDIR = objs
 
 # sources
 SRCS = main.c \
-	   validate.c init_data.c init_philo.c \
-	   create_threads.c actions.c check_status.c manage_threads.c \
-	   get_current_time.c \
-	   destroy_data.c \
+	   validate.c init_philosopher.c \
+	   routine.c actions.c manage_threads.c time_utils.c print.c \
+	   exit_philosopher.c \
 	   $(addprefix $(UTILSDIR)/, ft_atoi.c ft_isdigit.c ft_isspace.c \
 	   ft_putstr_fd.c ft_putendl_fd.c ft_strlen.c \
 	   ft_strjoin.c ft_strlcat.c ft_strlcpy.c)
