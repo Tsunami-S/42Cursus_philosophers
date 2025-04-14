@@ -6,11 +6,11 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 21:00:36 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/02 21:01:44 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/11 20:49:39 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dsize)
 {

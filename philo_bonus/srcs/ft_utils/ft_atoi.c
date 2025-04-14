@@ -6,11 +6,11 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 21:00:22 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/02 21:01:06 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/11 20:49:10 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 int	ft_atoi(const char *nptr)
 {

@@ -6,11 +6,11 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 21:00:30 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/02 21:01:22 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/11 20:49:33 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {

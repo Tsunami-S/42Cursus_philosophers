@@ -6,11 +6,11 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 21:00:34 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/02 21:01:52 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/11 20:49:36 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

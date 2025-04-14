@@ -6,11 +6,11 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 21:00:15 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/02 21:00:15 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/11 20:49:20 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 int	ft_isspace(char c)
 {

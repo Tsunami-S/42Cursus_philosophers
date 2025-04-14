@@ -6,7 +6,7 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 16:32:33 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/09 00:09:07 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/13 23:22:39 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	print_argv_error(int index, int err_num)
 	if (index == 4)
 		ft_putendl_fd("time_to_sleep: 1 ~ 2147483647", STDERR_FILENO);
 	if (index == 5)
-		ft_putendl_fd("num_of_times_must_eat: 0 ~ 2147483647", STDERR_FILENO);
+		ft_putendl_fd("num_of_times_must_eat: 1 ~ 2147483647", STDERR_FILENO);
 	return (index);
 }
 
@@ -73,7 +73,7 @@ void	validate(int argc, char **argv)
 			j++;
 		while (ft_isdigit(argv[i][j]))
 			j++;
-		if (argv[i][j] || (i < 5 && num <= 0) || (i == 5 && num < 0))
+		if (argv[i][j] || num <= 0)
 			err_num = print_argv_error(i, err_num);
 		i++;
 	}
