@@ -6,7 +6,7 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 19:28:57 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/09 19:30:42 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/14 13:57:14 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ bool	get_forks(t_philo *philo, int number, int num_of_philo)
 		return (false);
 	pthread_mutex_unlock(&philo->data->mutex_permission);
 	pthread_mutex_lock(first);
-	if (num_of_philo == ALONE && !update_status(philo, EATING))
+	if (num_of_philo == ALONE && !update_status(philo, FORK))
 		return (pthread_mutex_unlock(first), false);
 	else if (num_of_philo == ALONE)
 		return (true);

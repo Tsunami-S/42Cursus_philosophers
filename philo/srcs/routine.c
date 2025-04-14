@@ -6,7 +6,7 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 20:54:17 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/09 20:09:56 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/14 13:58:01 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,12 @@ void	*routine_for_one(void *arg)
 
 	philo = (t_philo *)arg;
 	number = 1;
+	eating(philo, number, ALONE);
 	while (1)
 	{
-		eating(philo, number, ALONE);
-		sleeping(philo);
-		thinking(philo);
 		if (is_over(philo))
 			break ;
+		usleep(300);
 	}
 	pthread_mutex_lock(&philo->data->mutex_status);
 	philo->data->num_of_left += 1;

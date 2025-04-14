@@ -6,7 +6,7 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:13:57 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/14 10:23:45 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/14 14:04:08 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ typedef enum e_type
 {
 	FORK,
 	EATING,
+	EATING_ALONE,
 	SLEEPING,
 	THINKING,
 	DIED,

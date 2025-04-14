@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   update_status.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 23:54:47 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/09 19:38:59 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/14 13:13:16 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ bool	update_status(t_philo *philo, t_type type)
 {
 	int	num;
 
-	type = type;
 	num = philo->number - 1;
 	if (type == DIED)
 		return (print_time(philo, type), false);
