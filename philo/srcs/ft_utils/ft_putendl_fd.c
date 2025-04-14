@@ -6,7 +6,7 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 21:00:27 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/02 21:01:14 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/14 19:53:14 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ void	ft_putendl_fd(char *s, int fd)
 	if (!str)
 		return ;
 	write(fd, str, ft_strlen(str));
+	free(str);
 }

@@ -6,7 +6,7 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 23:54:47 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/14 13:13:16 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/14 19:53:55 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	print_time(t_philo *philo, t_type type)
 	else if (type == THINKING)
 		printf("%lld %d is thinkng\n", timestamp, philo->number);
 	else if (type == DIED)
-		printf("%lld %d is died\n", timestamp, philo->number);
+		printf("%lld %d died\n", timestamp, philo->number);
 	pthread_mutex_unlock(&philo->data->mutex_write);
 	if (type == DIED)
 		philo->data->fin = 1;

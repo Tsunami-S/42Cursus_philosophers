@@ -6,7 +6,7 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 20:54:47 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/14 14:05:33 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/14 19:53:40 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	print_time(t_data *data, t_type type)
 	else if (type == THINKING)
 		printf("%lld %d is thinkng\n", timestamp, data->number);
 	else if (type == DIED)
-		printf("%lld %d is died\n", timestamp, data->number);
+		printf("%lld %d died\n", timestamp, data->number);
 }
 
 static void	is_over(t_data *data)
@@ -63,6 +63,7 @@ void	eating(t_data *data)
 		}
 	}
 	sem_wait(data->forks);
+	is_over(data);
 	sem_wait(data->write);
 	print_time(data, EATING);
 	sem_post(data->write);
