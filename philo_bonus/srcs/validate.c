@@ -6,7 +6,7 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 16:32:33 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/14 09:43:59 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/18 22:44:05 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	in_short_of_args(void)
 	ft_putendl_fd("time_to_die: 1 ~ 2147483647", STDERR_FILENO);
 	ft_putendl_fd("time_to_eat: 1 ~ 2147483647", STDERR_FILENO);
 	ft_putendl_fd("time_to_sleep: 1 ~ 2147483647", STDERR_FILENO);
-	ft_putendl_fd("num_of_times_must_eat: 0 ~ 2147483647", STDERR_FILENO);
+	ft_putendl_fd("num_of_times_must_eat: 1 ~ 2147483647", STDERR_FILENO);
 	exit(EXIT_FAILURE);
 }
 
