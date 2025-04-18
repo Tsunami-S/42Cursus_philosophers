@@ -6,7 +6,7 @@
 /*   By: tssaito <tssaito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 20:54:47 by tssaito           #+#    #+#             */
-/*   Updated: 2025/04/14 19:53:40 by tssaito          ###   ########.fr       */
+/*   Updated: 2025/04/19 08:44:26 by tssaito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	eating(t_data *data)
 			usleep(1000);
 		}
 	}
-	sem_wait(data->forks);
 	is_over(data);
+	sem_wait(data->forks);
 	sem_wait(data->write);
 	print_time(data, EATING);
 	sem_post(data->write);
@@ -72,7 +72,7 @@ void	eating(t_data *data)
 		sem_post(data->finish);
 	data->last_eat_time = get_current_time();
 	while (get_current_time() - data->last_eat_time < data->time_to_eat)
-		usleep(1000);
+		usleep(100);
 	is_over(data);
 	sem_post(data->forks);
 	sem_post(data->forks);
@@ -86,7 +86,7 @@ void	sleeping(t_data *data)
 	sem_post(data->write);
 	while (get_current_time() - data->last_eat_time < data->time_to_eat
 		+ data->time_to_sleep)
-		usleep(1000);
+		usleep(100);
 }
 
 void	thinking(t_data *data)
